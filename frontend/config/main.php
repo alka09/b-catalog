@@ -21,8 +21,7 @@ return [
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
         'authManager' => [
-            'class' => 'yii\rbac\PhpManager',
-            'defaultRoles' => ['user'], // Здесь нет роли "guest", т.к. эта роль виртуальная и не присутствует в модели UserExt
+            'class' => 'yii\rbac\DbManager',
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend

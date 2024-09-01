@@ -7,6 +7,7 @@ use app\models\authors\AuthorsSearch;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -69,6 +70,10 @@ class AuthorsController extends Controller
      */
     public function actionCreate()
     {
+        if (!\Yii::$app->user->can('updateRecord')) {
+            throw new ForbiddenHttpException('У вас нет доступа к данному действию');
+        }
+
         $model = new Authors();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -130,5 +135,15 @@ class AuthorsController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionReport() {
+        $searchModel = new AuthorsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }
