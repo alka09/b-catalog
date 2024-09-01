@@ -137,11 +137,14 @@ class AuthorsController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionReport() {
+    /**
+     * @return string
+     */
+    public function actionReport(): string {
         $searchModel = new AuthorsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('report', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

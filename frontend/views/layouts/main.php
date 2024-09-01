@@ -39,6 +39,7 @@ AppAsset::register($this);
         ['label' => 'Книги', 'url' => ['/books/index']],
         ['label' => 'Авторы', 'url' => ['/authors/index']],
         ['label' => 'Авторы и книги', 'url' => ['/book-author/index']],
+        ['label' => 'Отчет', 'url' => ['/authors/report']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
